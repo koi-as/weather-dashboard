@@ -5,35 +5,109 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
-    <link href="./assests/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assests/css/style.css">
 </head>
 <body>
-    <!-- Main elements will go here 
-    I need 4 sections:
-        Header
-            Display title of page
-        Aside
-            Need to have a search bar for cities
-                Title of search bar
-                Input for search bar
-                Submit button for search bar
-            Need to have a saved cities section under search bar
-                Display buttons with saved city names
-        Main
-            need to display selected city, date, and weather data
-                Display city name, todays date, and weather condition icon
-                Display temperature
-                Display wind speeds
-                Display humidity
-        Cards
-            need to display 5 cards with date and weather data
-                Title of card box
-                Display the next 5 dates
-                Weather condition Icon
-                Temperature
-                Wind speeds
-                Humidity
-    -->
+    <!-- Main elements will go here -->
+    <!-- I need 4 sections: -->
+    <!-- Header -->
+    <header class="bg-primary text-light p-1 text-center" id="titleElement">
+        <!-- Display title of page -->
+        <h1>WEATHER DASHBOARD</h1>
+    </header>
+    <!-- Main Page -->
+    <main class="h-100 row p-2">
+        <!-- Aside -->
+        <aside class="container col-2" id="citySelector">
+            <!-- Need to have a search bar for cities -->
+            <div class="col-12 border-bottom border-gray p-2" id="searchBar">
+                <!-- Title of search bar -->
+                <h2>Search for a City:</h2>
+                <!-- Input for search bar -->
+                <input class="col-12 p-1 my-2 text-dark border rounded" placeholder="Atlanta"/>
+                <!-- Submit button for search bar -->
+                <button class="col-12 p-1 my-2 text-dark bg-info border-0 rounded">Submit</button>
+            </div>
+            <!-- Need to have a saved cities section under search bar -->
+            <div class="col-12 p-2" id="citySaveBar">
+                <!-- Display buttons with saved city names -->
+                <button class="col-12 p-1 my-2 text-dark bg-gray border-0 rounded">Placeholder</button>
+                <button class="col-12 p-1 my-2 text-dark bg-gray border-0 rounded">Placeholder</button>
+                <button class="col-12 p-1 my-2 text-dark bg-gray border-0 rounded">Placeholder</button>
+                <button class="col-12 p-1 my-2 text-dark bg-gray border-0 rounded">Placeholder</button>
+            </div>
+        </aside>
+
+        <!-- Main Weather Element -->
+        <section class="container col-10">
+            <!-- need to display selected city, date, and weather data -->
+            <div class="border border-dark col-12 mx-3 p-2" id="mainWeatherCard">
+                <!-- Display city name, todays date, and weather condition icon -->
+                <h2 class="" id="mainCardTitle">City Name | (MM/dd/YYYY) | Weather Icon</h2>
+                <!-- Display temperature -->
+                <p class="" id="temperature">Temperature:</p>
+                <!-- Display wind speeds -->
+                <p class="" id="windSpeedMain">Wind Speed:</p>
+                <!-- Display humidity -->
+                <p class="" id="humidityMain">Humidity:</p>
+            </div>
+            <!-- Future Weather Cards -->
+            <!-- need to display 5 cards with date and weather data -->
+            <div class="p-3" id="futureWeatherCard">
+                <!-- Title of card box -->
+                <h3 class="" id="cardTitle">5-Day Forecast</h3>
+                <div class="row" id="cardBox">
+                    <div class="col-2 bg-secondary text-light mx-3 p-2" id="card1">
+                        <!-- Display the next 5 dates -->
+                        <h6 class="" id="cardDate">MM/dd/YYYY</h6>
+                        <!-- Weather condition Icon -->
+                        <p class="" id="cardIcon"></p>
+                        <!-- Temperature -->
+                        <p class="" id="cardTemp">Temperature:</p>
+                        <!-- Wind speeds -->
+                        <p class="" id="cardWind">Wind Speed:</p>
+                        <!-- Humidity -->
+                        <p class="" id="cardHumidity">Humidity:</p>
+                    </div>
+
+                    <div class="col-2 bg-secondary text-light mx-3 p-2" id="card2">
+                        <h6 class="" id="cardDate">MM/dd/YYYY</h6>
+                        <p class="" id="cardIcon"></p>
+                        <p class="" id="cardTemp">Temperature:</p>
+                        <p class="" id="cardWind">Wind Speed:</p>
+                        <p class="" id="cardHumidity">Humidity:</p>
+                    </div>
+
+                    <div class="col-2 bg-secondary text-light mx-3 p-2" id="card3">
+                        <h6 class="" id="cardDate">MM/dd/YYYY</h6>
+                        <p class="" id="cardIcon"></p>
+                        <p class="" id="cardTemp">Temperature:</p>
+                        <p class="" id="cardWind">Wind Speed:</p>
+                        <p class="" id="cardHumidity">Humidity:</p>
+                    </div>
+
+                    <div class="col-2 bg-secondary text-light mx-3 p-2" id="card4">
+                        <h6 class="" id="cardDate">MM/dd/YYYY</h6>
+                        <p class="" id="cardIcon"></p>
+                        <p class="" id="cardTemp">Temperature:</p>
+                        <p class="" id="cardWind">Wind Speed:</p>
+                        <p class="" id="cardHumidity">Humidity:</p>
+                    </div>
+
+                    <div class="col-2 bg-secondary text-light mx-3 p-2" id="card5">
+                        <h6 class="" id="cardDate">MM/dd/YYYY</h6>
+                        <p class="" id="cardIcon"></p>
+                        <p class="" id="cardTemp">Temperature:</p>
+                        <p class="" id="cardWind">Wind Speed:</p>
+                        <p class="" id="cardHumidity">Humidity:</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" href="./assests/js/script.js"></script>
 </body>
 </html>
