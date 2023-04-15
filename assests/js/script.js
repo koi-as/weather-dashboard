@@ -29,26 +29,25 @@ var city;
 // Input buttons for user to input city names
 var inputEl = $('#inputSearch')
 var submitEl = $('#submitSearch')
-var saveBtnEl = $('#citySaveBar') // these are the buttons that will hold saved city names
+var saveBtnEl = $('#citySaveBar')
+// A button element class to use in a click event for when any button is pressed
+var btnEl = $('.button')
 // Main card display elements
 var mainCity = $('#cityName')
 var mainTemp = $('#tempMain')
 var mainWind = $('#windSpeedMain')
 var mainHumidity = $('#humidityMain')
+// Shows todays date
+var today = dayjs().format('M/D/YYYY');
+var mainDateEl = $('#todayDate')
+mainDateEl.text(today);
 
-submitEl.on('click', function() { // when a user clicks the submit button
-    inputEl.val().trim();
-    if(inputEl.val() === '') {
-        alert('Please Choose a Valid City Name!')
-        return;
-    }
-    // Sets the value of 'city' to the user input
-    city = inputEl.val();
-
+function displayData(city) {
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + weatherKey + '&units=imperial') // then the OpenWeatherAPI is called
         .then(function(response) {
             if(response.status !== 200) { // If the city isn't found
                 console.log(response.status) // log an error message
+                alert('Please Choose a Valid City Name!') // alert the user about the issue
                 return; // and stop the code
             }
             return response.json(); // else run the code as normal
@@ -69,5 +68,41 @@ submitEl.on('click', function() { // when a user clicks the submit button
             cityBtn.addClass("col-12 p-1 my-2 text-dark bg-gray border-0 rounded");
             cityBtn.text(city)
             saveBtnEl.append(cityBtn)
+            // Clear the input area
+            inputEl.val('')
     });
+
+    fetch('api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + weatherKey)//this will be the forecast api
+        .then(function(response) {
+            if(response.status !== 200) { // If the city isn't found
+                return; // stop the code
+            }
+        })
+        .then(function(data) {
+            // call forecast data
+            // set data to text of card items
+        });
+};
+
+submitEl.on('click', function() { // when a user clicks the submit button... cont on line 42
+    inputEl.val().trim();
+    if(inputEl.val() === '') {
+        alert('Please Choose a Valid City Name!')
+        return;
+    }
+    // Sets the value of 'city' to the user input
+    city = inputEl.val();
+
+    displayData(city)
 })
+
+btnEl.on('click', function() {
+    // call a variable from local storage
+    // call the display data function with the variable from ls
+})
+
+var nextDay1;
+// var nextDay2
+// var nextDay3
+// var nextDay4
+// var nextDay5
