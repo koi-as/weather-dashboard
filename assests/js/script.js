@@ -29,11 +29,12 @@ var city;
 // Input buttons for user to input city names
 var inputEl = $('#inputSearch')
 var submitEl = $('#submitSearch')
-var saveBtnEl = $('#citySaveBar')
+var saveBarEl = $('#citySaveBar')
 // A button element class to use in a click event for when any button is pressed
 var btnEl = $('.button')
 // Main card display elements
 var mainCity = $('#cityName')
+var mainWeather = $('#weatherIcon')
 var mainTemp = $('#tempMain')
 var mainWind = $('#windSpeedMain')
 var mainHumidity = $('#humidityMain')
@@ -58,33 +59,50 @@ function displayData(city) {
             var tempData = data.main.temp;
             var windData = data.wind.speed;
             var humidityData = data.main.humidity;
+            // Sets weather icon
+            var iconCode = data.weather[0].icon;
+            var iconUrl = "https://openweathermap.org/img/wn/" + iconCode + ".png";
             // Displays the weather data to the main card
             mainCity.text(city);
+            mainWeather.attr('src', iconUrl)
             mainTemp.text('Temperature: ' + tempData + 'F');
-            mainWind.text('Wind Speed: ' + windData + 'MpH');
+            mainWind.text('Wind Speed: ' + windData + ' MpH');
             mainHumidity.text('Humidity: ' + humidityData + '%');
             // These lines create, style, display, and append a button for each new user input
-            var cityBtn = $('<button>')
-            cityBtn.addClass("col-12 p-1 my-2 text-dark bg-gray border-0 rounded");
-            cityBtn.text(city)
-            saveBtnEl.append(cityBtn)
+            var cityBtn = $('<button>');
+            cityBtn.addClass("button col-12 p-1 my-2 text-dark bg-gray border-0 rounded");
+            cityBtn.text(city);
+            saveBarEl.append(cityBtn);
+            saveButtonData(cityBtn);
             // Clear the input area
-            inputEl.val('')
+            inputEl.val('');
     });
 
-    fetch('api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + weatherKey)//this will be the forecast api
-        .then(function(response) {
-            if(response.status !== 200) { // If the city isn't found
-                return; // stop the code
-            }
-        })
-        .then(function(data) {
-            // call forecast data
-            // set data to text of card items
-        });
+    // fetch('api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + weatherKey)//this will be the forecast api
+    //     .then(function(response) {
+    //         if(response.status !== 200) { // If the city isn't found
+    //             return; // stop the code
+    //         }
+    //         return response.json();
+    //     })
+    //     .then(function(data) {
+    //         console.log(data)
+    //         // call forecast data
+    //         // set data to text of card items
+    //     });
 };
 
-submitEl.on('click', function() { // when a user clicks the submit button... cont on line 42
+function saveButtonData(saveBtn) {
+    // to save a button
+    var cityArr = [];
+    cityArr.push(city)
+    console.log(cityArr)
+    // need to save the city name to an array
+    // save the array to local storage and ENSURE IT DOESN'T GET OVERWRITTEN
+    // link the button click to displayData function
+};
+
+submitEl.on('click', function() { // when a user clicks the submit button... cont on line 46
     inputEl.val().trim();
     if(inputEl.val() === '') {
         alert('Please Choose a Valid City Name!')
@@ -96,13 +114,7 @@ submitEl.on('click', function() { // when a user clicks the submit button... con
     displayData(city)
 })
 
-btnEl.on('click', function() {
+btnEl.on('click', function() { // when a user clicks a city name button
     // call a variable from local storage
     // call the display data function with the variable from ls
 })
-
-var nextDay1;
-// var nextDay2
-// var nextDay3
-// var nextDay4
-// var nextDay5
