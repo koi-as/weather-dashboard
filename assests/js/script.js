@@ -113,12 +113,28 @@ function displayData(city) {
             $('#card3 #cardHumidity').text('Humidity: ' + nextHumid3 + '%');
             $('#card4 #cardHumidity').text('Humidity: ' + nextHumid4 + '%');
             $('#card5 #cardHumidity').text('Humidity: ' + nextHumid5 + '%');
-            // Sets weather icon
-            var iconCode = data.weather[0].icon;
-            var iconUrl = "https://openweathermap.org/img/wn/" + iconCode + ".png";
-            // Displays the weather data to the main card
-            mainCity.text(city);
-            mainWeather.attr('src', iconUrl)
+
+            // Weather icon display
+            var todayIconCode = data.list[0].weather[0].icon;
+            var nextIconCode1 = data.list[7].weather[0].icon;
+            var nextIconCode2 = data.list[15].weather[0].icon;
+            var nextIconCode3 = data.list[23].weather[0].icon;
+            var nextIconCode4 = data.list[31].weather[0].icon;
+            var nextIconCode5 = data.list[39].weather[0].icon;
+
+            var todayUrl = "https://openweathermap.org/img/wn/" + todayIconCode + ".png";
+            var next1Url = "https://openweathermap.org/img/wn/" + nextIconCode1 + ".png";
+            var next2Url = "https://openweathermap.org/img/wn/" + nextIconCode2 + ".png";
+            var next3Url = "https://openweathermap.org/img/wn/" + nextIconCode3 + ".png";
+            var next4Url = "https://openweathermap.org/img/wn/" + nextIconCode4 + ".png";
+            var next5Url = "https://openweathermap.org/img/wn/" + nextIconCode5 + ".png";
+
+            $('#weatherIcon').attr('src', todayUrl);
+            $('#card1 #cardIcon').attr('src', next1Url);
+            $('#card2 #cardIcon').attr('src', next2Url);
+            $('#card3 #cardIcon').attr('src', next3Url);
+            $('#card4 #cardIcon').attr('src', next4Url);
+            $('#card5 #cardIcon').attr('src', next5Url);
             // These lines create, style, display, and append a button for each new user input
             var cityBtn = $('<button>');
             cityBtn.addClass("button col-12 p-1 my-2 text-dark bg-gray border-0 rounded");
