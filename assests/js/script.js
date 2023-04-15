@@ -135,6 +135,10 @@ function displayData(city) {
             $('#card3 #cardIcon').attr('src', next3Url);
             $('#card4 #cardIcon').attr('src', next4Url);
             $('#card5 #cardIcon').attr('src', next5Url);
+
+            // City name display
+            $('#cityName').text(city);
+            
             // These lines create, style, display, and append a button for each new user input
             var cityBtn = $('<button>');
             cityBtn.addClass("button col-12 p-1 my-2 text-dark bg-gray border-0 rounded");
