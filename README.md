@@ -32,10 +32,10 @@ The above image shows what the application looks like when someone inputs city n
 Big thanks to Peyton Castillo for helping me make sure my APIs and files were properly linked!
 
 Not sure if I should put the APIs I used here or not, but I will for now...
-jQuery - https://jquery.com/
-dayjs - https://day.js.org/
-OpenWeatherMap - https://openweathermap.org/
-Bootstrap - https://getbootstrap.com/
+- jQuery - https://jquery.com/
+- dayjs - https://day.js.org/
+- OpenWeatherMap - https://openweathermap.org/
+- Bootstrap - https://getbootstrap.com/
 
 ## License
 
