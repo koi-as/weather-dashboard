@@ -1,28 +1,3 @@
-// Beginning of JS file
-
-// Pseudocode
-// 1 When I search for a city name
-//      User types in input field
-//      Save user data
-//      Create a button to find that city again (local storage?)
-//      Activate weather data
-// 2 then I can see todays date and the weather data for that city
-//      For the main card
-//          Use dayjs to display the date for today
-// var today = dayjs().format('M/D/YYYY');
-// var mainDateEl = $('#todayDate')
-// mainDateEl.text(today);
-//          Use openweatherapi to display the weather conditions, temperature, wind speeds, and humidity
-//      For the forecast cards
-//          use dayjs to display the next 5 days dates
-//          user openweather api to display the weather conditions, temperature, wind speeds, and humidity
-
-// openweather things to use:
-//      list.main.temp      | calls temperature, default kelvin -> change to imperial fahrenheit
-//      list.main.humidity  | calls humidity %
-//      list.wind.speed     | calls wind speed, default m/s -> change to imperial mph
-//      forecast.symbol.var | gets weather icon id
-
 // My OpenWeather API Key
 var weatherKey = '1f8dd424d44ab8bddae9917decbf64a3';
 var city;
@@ -35,31 +10,35 @@ var cityArr = [];
 // A button element class to use in a click event for when any button is pressed
 var btnEl = $('button')
 
+// when the page loads, cities that are saved in local storage become buttons
 function initialize() {
+    // gets the stored city names from localStorage
     var storedCities = JSON.parse(localStorage.getItem('savedCities'))
-    // console.log(storedCities)
+    // ensures that only valid data entries will be added to the city array
     if(storedCities !== null) {
         cityArr = storedCities
     }
-
+    // call the renderBtns function
     renderBtns()
 };
-
+// creates a button after a user inputs a city name into the search bar
 function renderBtns() {
+    // resets the html for the save bar so that it doesn't load copies of the buttons
     saveBarEl.html('');
     //renders a new button for each city
     for(var i = 0; i < cityArr.length; i++) {
+        // draws the values of the cityArr out
         var savedCity = cityArr[i];
-
+        // creates a button for each value drawn from cityArr
         var cityBtn = $('<button>');
         cityBtn.addClass("btn btn-outline-info col-12 p-1 my-2 text-dark rounded");
         cityBtn.attr('id', savedCity);
         cityBtn.text(savedCity);
-
+        // appends newly created buttons to the saveBar element
         saveBarEl.append(cityBtn);
     }
 };
-
+// displays weahter data for chosen city
 function displayData(city) {
     fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + weatherKey + '&units=imperial')
         .then(function (response) {
@@ -71,7 +50,6 @@ function displayData(city) {
             return response.json(); // else run the code as normal
         })
         .then(function (data) {
-            console.log(data)
             // date display for weather data cards
             $('#todayDate').text(dayjs.unix(data.list[0].dt).format('M/D/YYYY'));
             $('#card1 #cardDate').text(dayjs.unix(data.list[7].dt).format('M/D/YYYY'));
@@ -111,37 +89,40 @@ function displayData(city) {
             $('#cityName').text(city);
         });
 };
-
+// saves the user data
 function saveData() {
     // save the array to local storage and ENSURE IT DOESN'T GET OVERWRITTEN
     localStorage.setItem('savedCities', JSON.stringify(cityArr))
 };
-
-submitEl.on('click', function () { // when a user clicks the submit button... cont on line 46
+// for when a user submits a city name
+submitEl.on('click', function () {
+    // trims the extra spaces from the user input
     inputEl.val().trim();
+    // if the user clicks the submit button without entering a city name, an error message will display
     if (inputEl.val() === '') {
         alert('Please Choose a Valid City Name!')
         return;
     }
-    // Sets the value of 'city' to the user input
+    // Sets the value of 'city' to the user input and pushes that value to an empty array
     city = inputEl.val();
     cityArr.push(city);
     // Clear the input area
     inputEl.val('');
-
+    // calls the functions for saving the user input, creating a button from the user input, and display data for the user input
     saveData(city);
     renderBtns();
     displayData(city)
 })
-
+// for when a saved city button is clicked
 saveBarEl.on('click', function(event) {
+    // targets the button that was clicked
     var element = event.target;
-
+    // grabs the element id value and sends it to the displayData function
     if(element.matches('button') === true) {
         var i = $(element).attr('id');
         console.log(i);
         displayData(i)
     }
 });
-
+//call the initialize function
 initialize()
