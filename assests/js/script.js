@@ -48,97 +48,42 @@ function displayData(city) {
         .then(function (data) {
             console.log(data)
             // date display for weather data cards
-            // pulls unix timestamp for each date
-            var today = data.list[0].dt;
-            var nextDay1 = data.list[7].dt;
-            var nextDay2 = data.list[15].dt;
-            var nextDay3 = data.list[23].dt;
-            var nextDay4 = data.list[31].dt;
-            var nextDay5 = data.list[39].dt;
-            // converts unix timestamp to readable format
-            var todayDisplay = dayjs.unix(today).format('M/D/YYYY');
-            var nextDay1Display = dayjs.unix(nextDay1).format('M/D/YYYY');
-            var nextDay2Display = dayjs.unix(nextDay2).format('M/D/YYYY');
-            var nextDay3Display = dayjs.unix(nextDay3).format('M/D/YYYY');
-            var nextDay4Display = dayjs.unix(nextDay4).format('M/D/YYYY');
-            var nextDay5Display = dayjs.unix(nextDay5).format('M/D/YYYY');
-            // displays readable date to each fo the cards
-            $('#todayDate').text(todayDisplay);
-            $('#card1 #cardDate').text(nextDay1Display);
-            $('#card2 #cardDate').text(nextDay2Display);
-            $('#card3 #cardDate').text(nextDay3Display);
-            $('#card4 #cardDate').text(nextDay4Display);
-            $('#card5 #cardDate').text(nextDay5Display);
-
-            // temperature, wind speed, and humidity display for weather cards
+            $('#todayDate').text(dayjs.unix(data.list[0].dt).format('M/D/YYYY'));
+            $('#card1 #cardDate').text(dayjs.unix(data.list[7].dt).format('M/D/YYYY'));
+            $('#card2 #cardDate').text(dayjs.unix(data.list[15].dt).format('M/D/YYYY'));
+            $('#card3 #cardDate').text(dayjs.unix(data.list[23].dt).format('M/D/YYYY'));
+            $('#card4 #cardDate').text(dayjs.unix(data.list[31].dt).format('M/D/YYYY'));
+            $('#card5 #cardDate').text(dayjs.unix(data.list[39].dt).format('M/D/YYYY'));
             // temperature display
-            var todayTemp = data.list[0].main.temp;
-            var nextTemp1 = data.list[7].main.temp;
-            var nextTemp2 = data.list[15].main.temp;
-            var nextTemp3 = data.list[23].main.temp;
-            var nextTemp4 = data.list[31].main.temp;
-            var nextTemp5 = data.list[39].main.temp;
-
-            $('#tempMain').text('Temperature: ' + todayTemp + 'F');
-            $('#card1 #cardTemp').text('Temperature: ' + nextTemp1 + 'F');
-            $('#card2 #cardTemp').text('Temperature: ' + nextTemp2 + 'F');
-            $('#card3 #cardTemp').text('Temperature: ' + nextTemp3 + 'F');
-            $('#card4 #cardTemp').text('Temperature: ' + nextTemp4 + 'F');
-            $('#card5 #cardTemp').text('Temperature: ' + nextTemp5 + 'F');
+            $('#tempMain').text('Temperature: ' + data.list[0].main.temp + 'F');
+            $('#card1 #cardTemp').text('Temperature: ' + data.list[7].main.temp + 'F');
+            $('#card2 #cardTemp').text('Temperature: ' + data.list[15].main.temp + 'F');
+            $('#card3 #cardTemp').text('Temperature: ' + data.list[23].main.temp + 'F');
+            $('#card4 #cardTemp').text('Temperature: ' + data.list[31].main.temp + 'F');
+            $('#card5 #cardTemp').text('Temperature: ' + data.list[39].main.temp + 'F');
             // wind speed display
-            var todayWind = data.list[0].wind.speed;
-            var nextWind1 = data.list[7].wind.speed;
-            var nextWind2 = data.list[15].wind.speed;
-            var nextWind3 = data.list[23].wind.speed;
-            var nextWind4 = data.list[31].wind.speed;
-            var nextWind5 = data.list[39].wind.speed;
-
-            $('#windSpeedMain').text('Wind Speed: ' + todayWind + ' MpH');
-            $('#card1 #cardWind').text('Wind Speed: ' + nextWind1 + ' MpH');
-            $('#card2 #cardWind').text('Wind Speed: ' + nextWind2 + ' MpH');
-            $('#card3 #cardWind').text('Wind Speed: ' + nextWind3 + ' MpH');
-            $('#card4 #cardWind').text('Wind Speed: ' + nextWind4 + ' MpH');
-            $('#card5 #cardWind').text('Wind Speed: ' + nextWind5 + ' MpH');
+            $('#windSpeedMain').text('Wind Speed: ' + data.list[0].wind.speed + ' MpH');
+            $('#card1 #cardWind').text('Wind Speed: ' + data.list[7].wind.speed + ' MpH');
+            $('#card2 #cardWind').text('Wind Speed: ' + data.list[15].wind.speed + ' MpH');
+            $('#card3 #cardWind').text('Wind Speed: ' + data.list[23].wind.speed + ' MpH');
+            $('#card4 #cardWind').text('Wind Speed: ' + data.list[31].wind.speed + ' MpH');
+            $('#card5 #cardWind').text('Wind Speed: ' + data.list[39].wind.speed + ' MpH');
             // humidity display
-            var todayHumid = data.list[0].main.humidity;
-            var nextHumid1 = data.list[7].main.humidity;
-            var nextHumid2 = data.list[15].main.humidity;
-            var nextHumid3 = data.list[23].main.humidity;
-            var nextHumid4 = data.list[31].main.humidity;
-            var nextHumid5 = data.list[39].main.humidity;
-
-            $('#humidityMain').text('Humidity: ' + todayHumid + '%');
-            $('#card1 #cardHumidity').text('Humidity: ' + nextHumid1 + '%');
-            $('#card2 #cardHumidity').text('Humidity: ' + nextHumid2 + '%');
-            $('#card3 #cardHumidity').text('Humidity: ' + nextHumid3 + '%');
-            $('#card4 #cardHumidity').text('Humidity: ' + nextHumid4 + '%');
-            $('#card5 #cardHumidity').text('Humidity: ' + nextHumid5 + '%');
-
+            $('#humidityMain').text('Humidity: ' + data.list[0].main.humidity  + '%');
+            $('#card1 #cardHumidity').text('Humidity: ' + data.list[7].main.humidity  + '%');
+            $('#card2 #cardHumidity').text('Humidity: ' + data.list[15].main.humidity + '%');
+            $('#card3 #cardHumidity').text('Humidity: ' + data.list[23].main.humidity + '%');
+            $('#card4 #cardHumidity').text('Humidity: ' + data.list[31].main.humidity + '%');
+            $('#card5 #cardHumidity').text('Humidity: ' + data.list[39].main.humidity + '%');
             // Weather icon display
-            var todayIconCode = data.list[0].weather[0].icon;
-            var nextIconCode1 = data.list[7].weather[0].icon;
-            var nextIconCode2 = data.list[15].weather[0].icon;
-            var nextIconCode3 = data.list[23].weather[0].icon;
-            var nextIconCode4 = data.list[31].weather[0].icon;
-            var nextIconCode5 = data.list[39].weather[0].icon;
-
-            var todayUrl = "https://openweathermap.org/img/wn/" + todayIconCode + ".png";
-            var next1Url = "https://openweathermap.org/img/wn/" + nextIconCode1 + ".png";
-            var next2Url = "https://openweathermap.org/img/wn/" + nextIconCode2 + ".png";
-            var next3Url = "https://openweathermap.org/img/wn/" + nextIconCode3 + ".png";
-            var next4Url = "https://openweathermap.org/img/wn/" + nextIconCode4 + ".png";
-            var next5Url = "https://openweathermap.org/img/wn/" + nextIconCode5 + ".png";
-
-            $('#weatherIcon').attr('src', todayUrl);
-            $('#card1 #cardIcon').attr('src', next1Url);
-            $('#card2 #cardIcon').attr('src', next2Url);
-            $('#card3 #cardIcon').attr('src', next3Url);
-            $('#card4 #cardIcon').attr('src', next4Url);
-            $('#card5 #cardIcon').attr('src', next5Url);
-
+            $('#weatherIcon').attr('src', "https://openweathermap.org/img/wn/" + data.list[0].weather[0].icon + ".png");
+            $('#card1 #cardIcon').attr('src', "https://openweathermap.org/img/wn/" + data.list[7].weather[0].icon + ".png");
+            $('#card2 #cardIcon').attr('src', "https://openweathermap.org/img/wn/" + data.list[15].weather[0].icon + ".png");
+            $('#card3 #cardIcon').attr('src', "https://openweathermap.org/img/wn/" + data.list[23].weather[0].icon + ".png");
+            $('#card4 #cardIcon').attr('src', "https://openweathermap.org/img/wn/" + data.list[31].weather[0].icon + ".png");
+            $('#card5 #cardIcon').attr('src', "https://openweathermap.org/img/wn/" + data.list[39].weather[0].icon + ".png");
             // City name display
             $('#cityName').text(city);
-            
             // These lines create, style, display, and append a button for each new user input
             var cityBtn = $('<button>');
             cityBtn.addClass("button col-12 p-1 my-2 text-dark bg-gray border-0 rounded");
