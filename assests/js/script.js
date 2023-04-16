@@ -53,6 +53,7 @@ function renderBtns() {
 
         var cityBtn = $('<button>');
         cityBtn.addClass("btn btn-outline-info col-12 p-1 my-2 text-dark rounded");
+        cityBtn.attr('id', savedCity);
         cityBtn.text(savedCity);
 
         saveBarEl.append(cityBtn);
@@ -111,7 +112,7 @@ function displayData(city) {
         });
 };
 
-function saveData(city) {
+function saveData() {
     // save the array to local storage and ENSURE IT DOESN'T GET OVERWRITTEN
     localStorage.setItem('savedCities', JSON.stringify(cityArr))
 };
@@ -133,11 +134,13 @@ submitEl.on('click', function () { // when a user clicks the submit button... co
     displayData(city)
 })
 
-btnEl.on('click', function(event) {
+saveBarEl.on('click', function(event) {
     var element = event.target;
 
     if(element.matches('button') === true) {
-        displayData(city)
+        var i = $(element).attr('id');
+        console.log(i);
+        displayData(i)
     }
 });
 
