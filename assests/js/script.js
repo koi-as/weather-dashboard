@@ -33,7 +33,31 @@ var saveBarEl = $('#citySaveBar')
 // An empty array to save city names to
 var cityArr = [];
 // A button element class to use in a click event for when any button is pressed
-var btnEl = $('.button')
+var btnEl = $('button')
+
+function initialize() {
+    var storedCities = JSON.parse(localStorage.getItem('savedCities'))
+    // console.log(storedCities)
+    if(storedCities !== null) {
+        cityArr = storedCities
+    }
+
+    renderBtns()
+};
+
+function renderBtns() {
+    saveBarEl.html('');
+    //renders a new button for each city
+    for(var i = 0; i < cityArr.length; i++) {
+        var savedCity = cityArr[i];
+
+        var cityBtn = $('<button>');
+        cityBtn.addClass("btn btn-outline-info col-12 p-1 my-2 text-dark rounded");
+        cityBtn.text(savedCity);
+
+        saveBarEl.append(cityBtn);
+    }
+};
 
 function displayData(city) {
     fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + weatherKey + '&units=imperial')
@@ -56,11 +80,11 @@ function displayData(city) {
             $('#card5 #cardDate').text(dayjs.unix(data.list[39].dt).format('M/D/YYYY'));
             // temperature display
             $('#tempMain').text('Temperature: ' + data.list[0].main.temp + 'F');
-            $('#card1 #cardTemp').text('Temperature: ' + data.list[7].main.temp + 'F');
-            $('#card2 #cardTemp').text('Temperature: ' + data.list[15].main.temp + 'F');
-            $('#card3 #cardTemp').text('Temperature: ' + data.list[23].main.temp + 'F');
-            $('#card4 #cardTemp').text('Temperature: ' + data.list[31].main.temp + 'F');
-            $('#card5 #cardTemp').text('Temperature: ' + data.list[39].main.temp + 'F');
+            $('#card1 #cardTemp').text('Temperature: ' + data.list[7].main.temp + ' F');
+            $('#card2 #cardTemp').text('Temperature: ' + data.list[15].main.temp + ' F');
+            $('#card3 #cardTemp').text('Temperature: ' + data.list[23].main.temp + ' F');
+            $('#card4 #cardTemp').text('Temperature: ' + data.list[31].main.temp + ' F');
+            $('#card5 #cardTemp').text('Temperature: ' + data.list[39].main.temp + ' F');
             // wind speed display
             $('#windSpeedMain').text('Wind Speed: ' + data.list[0].wind.speed + ' MpH');
             $('#card1 #cardWind').text('Wind Speed: ' + data.list[7].wind.speed + ' MpH');
@@ -84,24 +108,12 @@ function displayData(city) {
             $('#card5 #cardIcon').attr('src', "https://openweathermap.org/img/wn/" + data.list[39].weather[0].icon + ".png");
             // City name display
             $('#cityName').text(city);
-            // These lines create, style, display, and append a button for each new user input
-            var cityBtn = $('<button>');
-            cityBtn.addClass("button col-12 p-1 my-2 text-dark bg-gray border-0 rounded");
-            cityBtn.text(city);
-            saveBarEl.append(cityBtn);
-            saveButtonData(cityBtn);
-            // Clear the input area
-            inputEl.val('');
         });
 };
 
-function saveButtonData(saveBtn) {
-    // to save a button
-    cityArr.push(city)
-    console.log(cityArr)
-    // need to save the city name to an array
+function saveData(city) {
     // save the array to local storage and ENSURE IT DOESN'T GET OVERWRITTEN
-    // link the button click to displayData function
+    localStorage.setItem('savedCities', JSON.stringify(cityArr))
 };
 
 submitEl.on('click', function () { // when a user clicks the submit button... cont on line 46
@@ -112,11 +124,21 @@ submitEl.on('click', function () { // when a user clicks the submit button... co
     }
     // Sets the value of 'city' to the user input
     city = inputEl.val();
+    cityArr.push(city);
+    // Clear the input area
+    inputEl.val('');
 
+    saveData(city);
+    renderBtns();
     displayData(city)
 })
 
-btnEl.on('click', function () { // when a user clicks a city name button
-    // call a variable from local storage
-    // call the display data function with the variable from ls
-})
+btnEl.on('click', function(event) {
+    var element = event.target;
+
+    if(element.matches('button') === true) {
+        displayData(city)
+    }
+});
+
+initialize()
