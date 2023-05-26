@@ -18,6 +18,8 @@ function initialize() {
     if(storedCities !== null) {
         cityArr = storedCities
     }
+    // create base data on initialize
+    displayData('London');
     // call the renderBtns function
     renderBtns()
 };
